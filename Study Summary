@@ -3,6 +3,7 @@ weibo/weixin变ip位置:
 	clash代理模式选择全局,在控制面板的代理中GLOBLE手动选择需要的
 
 
+
 Docker装subconverter-docker实现本地订阅转换
 This is a minimized image to run https://github.com/tindy2013/subconverter.
 
@@ -19,3 +20,44 @@ curl http://localhost:25500/version
 ```
 # if you see `subconverter vx.x.x backend` then the container is up and running
 ```
+
+OpenClash 运行模式介绍
+下面先简单介绍一下 OpenClash 几种运行模式。
+
+「OpenClash Fake-IP、Redir-Host模式怎么选择？：https://openclash.net/14」
+Fake-IP（增强）模式
+客户端进行通讯时会先进行 DNS 查询目标 IP 地址，拿到查询结果后再尝试进行连接。
+
+Fake-IP 模式在客户端发起 DNS 请求时会立即返回一个保留地址（198.18.0.1/16），同时向上游 DNS 服务器查询结果，如果判定返回结果为污染或者命中代理规则，则直接发送域名至代理服务器进行远端解析。
+
+此时客户端立即向 Fake-IP 发起的请求会被快速响应，节约了一次本地向 DNS 服务器查询的时间。
+
+「OpenClash Fake-IP、Redir-Host模式怎么选择？：https://openclash.net/14」
+实际效果：客户端响应速度加快，浏览体验更加顺畅，减轻网页加载时间过长的情况。
+
+Fake-IP（TUN）模式
+此模式与 Fake-IP（增强）模式类似，不同在于能够代理使用域名的 UDP 链接。
+
+Fake-IP（游戏）模式
+也称 Fake-IP TUN-混合模式，此模式与 Fake-IP（增强）模式类似，不同点在于能够代理所有 UDP 链接，提升 nat 等级，改善游戏联机体验。
+
+「OpenClash Fake-IP、Redir-Host模式怎么选择？：https://openclash.net/14」
+Redir-Host（兼容）模式
+客户端进行通讯时 DNS 由 Clash 先进行并发查询，等待返回结果后再尝试进行规则判定和连接。
+
+当判定需要代理时，使用 fallback 组 DNS 的查询结果进行通讯
+
+实际效果：客户端响应速度一般，可能出现网页加载时间过长的情况。
+
+「OpenClash Fake-IP、Redir-Host模式怎么选择？：https://openclash.net/14」
+Redir-Host（TUN）模式
+此模式与 Redir-Host（兼容）模式类似，不同在于能够代理所有 UDP 链接，提升 nat 等级，改善游戏联机体验。
+
+Redir-Host（游戏）模式
+Redir-Host TUN-混合模式，此模式与 Redir-Host（兼容）模式类似，不同在于能够代理所有 UDP 链接，提升 nat 等级，改善游戏联机体验。
+
+OpenClash 几种模式怎么选？
+虽然插件默认配置可能是 Redir-Host（兼容）模式，但是根据官方 Wiki 文档 说明，建议首选 Fake-IP（增强）模式。
+
+
+有稳定需求，或对 NAT 敏感时选择 Redir-Host（兼容）模式，而其他模式均处于测试阶段，按需选择。
