@@ -1,0 +1,21 @@
+学习总结:
+weibo/weixin变ip位置:
+	clash代理模式选择全局,在控制面板的代理中GLOBLE手动选择需要的
+
+
+Docker装subconverter-docker实现本地订阅转换
+This is a minimized image to run https://github.com/tindy2013/subconverter.
+
+For running this docker, simply use the following commands:
+
+# run the container detached, forward internal port 25500 to host port 25500
+```
+docker run -d --restart=always -p 25500:25500 tindy2013/subconverter:latest
+```
+# then check its status检查容器状态
+
+```
+curl http://localhost:25500/version
+```
+# if you see `subconverter vx.x.x backend` then the container is up and running
+```
