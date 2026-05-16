@@ -20,6 +20,15 @@ curl http://localhost:25500/version
 ```
 # if you see `subconverter vx.x.x backend` then the container is up and running
 ```
+订阅链接问题：
+	首先关闭在线订阅转换，排除其他因素。
+	订阅连接剩余一个测试，多条订阅必须开启订阅转换。
+	确保是直连状态--某些代理节点会屏蔽别的机场订阅,添加/编辑配置时,保证直连状态或关闭openClash运行.
+	订阅连接格式是否复制正确（clash、通用）、流量是否剩余，订阅是否过期，是否有重置订阅，机场订阅是否有
+	自动变更，机场本身故障。|
+	工
+	切换UA验证。
+	勾选设置里的绕过服务器地址验证。
 
 OpenClash 运行模式介绍
 下面先简单介绍一下 OpenClash 几种运行模式。
