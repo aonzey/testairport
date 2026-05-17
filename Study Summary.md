@@ -8,34 +8,35 @@ Docker装subconverter-docker实现本地订阅转换
 This is a minimized image to run https://github.com/tindy2013/subconverter.
 
 For running this docker, simply use the following commands:
-	```
-	# run the container detached, forward internal port 25500 to host port 25500
-	docker run -d --restart=always -p 25500:25500 tindy2013/subconverter:latest
-	# then check its status检查容器状态
-	curl http://localhost:25500/version
-	# if you see `subconverter vx.x.x backend` then the container is up and running
-	```
+```
+# run the container detached, forward internal port 25500 to host port 25500
+docker run -d --restart=always -p 25500:25500 tindy2013/subconverter:latest
+# then check its status检查容器状态
+curl http://localhost:25500/version
+# if you see `subconverter vx.x.x backend` then the container is up and running
+```
 
 这个二次开发完善支持了几乎所有协议: https://github.com/asdlokj1qpi23/subconverter
-	```
-	# run the container detached, forward internal port 25500 to host port 25500
-	docker run -d --restart=always -p 25500:25500 asdlokj1qpi23/subconverter:latest
-	# then check its status
-	curl http://localhost:25500/version
-	# if you see `subconverter vx.x.x backend` then the container is up and running
-	```
-也可在openClash默认的订阅转换地址中增加本地订阅服务转换地址
-	修改的文件位置:/usr/lib/lua/luci/view/openclash/config_upload.htm
-	# 在<select id="convert-address-input" class="form-select">中添加这条 -->
-		```
-		<option value="http://localhost:25500/sub">localhost:25500</option>
-		```
-	
-	修改的文件位置:/usr/lib/lua/luci/model/cbi/openclash/config-subscribe-edit.lua
-	#在Convert Address中添加这条
-		```
-		o:value("http://localhost:25500/sub", translate("localhost:25500"))
-		```
+```
+# run the container detached, forward internal port 25500 to host port 25500
+docker run -d --restart=always -p 25500:25500 asdlokj1qpi23/subconverter:latest
+# then check its status
+curl http://localhost:25500/version
+# if you see `subconverter vx.x.x backend` then the container is up and running
+```
+
+### 也可在openClash默认的订阅转换地址中增加本地订阅服务转换地址
+> 修改的文件位置:/usr/lib/lua/luci/view/openclash/config_upload.htm
+# 在<select id="convert-address-input" class="form-select">中添加这条 -->
+```
+<option value="http://localhost:25500/sub">localhost:25500</option>
+```
+
+修改的文件位置:/usr/lib/lua/luci/model/cbi/openclash/config-subscribe-edit.lua
+#在Convert Address中添加这条
+```
+o:value("http://localhost:25500/sub", translate("localhost:25500"))
+```
 
 订阅链接问题：
 	首先关闭在线订阅转换，排除其他因素。
