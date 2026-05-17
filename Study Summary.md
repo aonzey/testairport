@@ -16,7 +16,7 @@ curl http://localhost:25500/version
 # if you see `subconverter vx.x.x backend` then the container is up and running
 ```
 
-这个二次开发完善支持了几乎所有协议: https://github.com/asdlokj1qpi23/subconverter
+##### 这个二次开发完善支持了几乎所有协议: https://github.com/asdlokj1qpi23/subconverter
 ```
 # run the container detached, forward internal port 25500 to host port 25500
 docker run -d --restart=always -p 25500:25500 asdlokj1qpi23/subconverter:latest
@@ -25,20 +25,20 @@ curl http://localhost:25500/version
 # if you see `subconverter vx.x.x backend` then the container is up and running
 ```
 
-### 也可在openClash默认的订阅转换地址中增加本地订阅服务转换地址
+##### 也可在openClash默认的订阅转换地址中增加本地订阅服务转换地址
 > 修改的文件位置:/usr/lib/lua/luci/view/openclash/config_upload.htm
-# 在<select id="convert-address-input" class="form-select">中添加这条 -->
+##### 在```<select id="convert-address-input" class="form-select">```中添加下面这条:
 ```
 <option value="http://localhost:25500/sub">localhost:25500</option>
 ```
 
-修改的文件位置:/usr/lib/lua/luci/model/cbi/openclash/config-subscribe-edit.lua
-#在Convert Address中添加这条
+> 修改的文件位置:/usr/lib/lua/luci/model/cbi/openclash/config-subscribe-edit.lua
+##### 在Convert Address中添加下面这条:
 ```
 o:value("http://localhost:25500/sub", translate("localhost:25500"))
 ```
 
-订阅链接问题：
+##### 订阅链接问题：
 	首先关闭在线订阅转换，排除其他因素。
 	订阅连接剩余一个测试，多条订阅必须开启订阅转换。
 	确保是直连状态--某些代理节点会屏蔽别的机场订阅,添加/编辑配置时,保证直连状态或关闭openClash运行.
